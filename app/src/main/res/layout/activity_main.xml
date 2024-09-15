@@ -19,7 +19,6 @@
         android:layout_below="@id/timePicker"
         android:layout_centerHorizontal="true"/>
 
-    <!-- Botón en la esquina superior derecha -->
     <Button
         android:id="@+id/topRightButton"
         android:layout_width="wrap_content"
