@@ -34,6 +34,10 @@
             android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="false"/>
+        <activity
+            android:name=".ViewAlarmsActivity"
+            android:exported="true" />
+
 
     </application>
 </manifest>

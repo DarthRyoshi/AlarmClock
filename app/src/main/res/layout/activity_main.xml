@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <TimePicker
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:timePickerMode="spinner"
-        android:layout_marginBottom="20dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:timePickerMode="spinner"/>
 
     <Button
         android:id="@+id/setAlarmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Alarm"
+        android:text="Poner Alarma"
         android:layout_below="@id/timePicker"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/viewAlarmsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Alarmas"
+        android:layout_below="@id/setAlarmButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/topRightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentEnd="true"
+        android:layout_margin="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="11dp"
+
+        android:layout_marginEnd="-3dp"
+        android:layout_marginBottom="32dp"
+        android:text="Inicio Sesion" />
 </RelativeLayout>
