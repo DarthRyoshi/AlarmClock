@@ -2,61 +2,53 @@ package com.example.alarmclock;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
-    private Button backButton;
+    private EditText usernameEditText, passwordEditText;
+    private Button loginButton, createAccountButton;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Inicializamos los componentes de la interfaz
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.login_button);
-        backButton = findViewById(R.id.back_button);
+        usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        loginButton = findViewById(R.id.loginButton);
+        createAccountButton = findViewById(R.id.createAccountButton);
+        dbHelper = new DatabaseHelper(this);
 
-        // Acción del botón de login
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtener las credenciales y eliminar espacios en blanco
-                String username = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
+        loginButton.setOnClickListener(view -> loginUser());
 
-                // Verificar credenciales
-                if ((username.equals("Ryoshi") || username.equals("Javier") || username.equals("Black_Ryoshi"))
-                        && password.equals("Ryukyagami0330$")) {
-                    // Usuario autenticado correctamente
-                    Toast.makeText(LoginActivity.this, "Inicio de sesión completado. ¡Bienvenido " + username + "!", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    // Mostrar error
-                    Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
-                }
-            }
+        // Manejar clic en el botón "Crear cuenta"
+        createAccountButton.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
         });
+    }
 
-        // Acción del botón de regresar
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Cierra LoginActivity
-            }
-        });
+    private void loginUser() {
+        String username = usernameEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (dbHelper.checkUser(username, password)) {
+            Toast.makeText(this, "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show();
+            // Aquí puedes ir a la actividad principal
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Termina la actividad actual
+        } else {
+            Toast.makeText(this, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

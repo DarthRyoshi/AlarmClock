@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.alarmclock">
 
-
-<uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -12,32 +11,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AlarmClock">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!-- Actividad principal -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true">  <!-- Agregado el atributo android:exported -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- LoginActivity -->
         <activity
-            android:name=".LoginActivity"
-            android:exported="true" /> <!-- Asegúrate de que esta actividad sea accesible -->
+            android:name=".MainActivity"
+            android:exported="false"/>  <!-- Ajusta según tu necesidad -->
 
-        <!-- Receptor para la alarma -->
-        <receiver
-            android:name=".AlarmReceiver"
-            android:enabled="true"
-            android:exported="false"/>
         <activity
             android:name=".ViewAlarmsActivity"
-            android:exported="true" />
+            android:exported="false"/>  <!-- Ajusta según tu necesidad -->
+        <activity android:name=".CreateAccountActivity" />
 
 
     </application>
+
 </manifest>

@@ -1,22 +1,20 @@
 package com.example.alarmclock;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ViewAlarmsActivity extends AppCompatActivity {
     private ListView alarmsListView;
     private List<String> alarmsList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private Button backToMainButton;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,28 +23,36 @@ public class ViewAlarmsActivity extends AppCompatActivity {
 
         alarmsListView = findViewById(R.id.alarmsListView);
         backToMainButton = findViewById(R.id.backToMainButton);
+        dbHelper = new DatabaseHelper(this);
+
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alarmsList);
         alarmsListView.setAdapter(adapter);
 
-        // Cargar y mostrar las alarmas guardadas
         loadAlarms();
 
-        // Acción para volver a MainActivity
         backToMainButton.setOnClickListener(view -> finish());
     }
 
     private void loadAlarms() {
-        SharedPreferences sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE);
-        Map<String, ?> allAlarms = sharedPreferences.getAll(); // Obtener todas las alarmas
+        Cursor cursor = dbHelper.getAlarms();
+        alarmsList.clear();
 
-        alarmsList.clear(); // Limpiar la lista antes de cargar
-        for (Map.Entry<String, ?> entry : allAlarms.entrySet()) {
-            alarmsList.add("Alarm ID: " + entry.getKey() + ", Time: " + entry.getValue().toString()); // Agregar alarmas a la lista
+        // Verifica si el cursor es nulo o no contiene registros
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int timeIndex = cursor.getColumnIndex("time");
+                // Verifica si timeIndex es válido
+                if (timeIndex != -1) {
+                    String time = cursor.getString(timeIndex);
+                    alarmsList.add("Hora: " + time);
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        } else {
+            // Manejar el caso donde no hay alarmas
+            alarmsList.add("No hay alarmas.");
         }
 
-        // Log para verificar el contenido de SharedPreferences
-        Log.d("ViewAlarmsActivity", "Alarms: " + allAlarms.toString());
-
-        adapter.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
+        adapter.notifyDataSetChanged();
     }
 }

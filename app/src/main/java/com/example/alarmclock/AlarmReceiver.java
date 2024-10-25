@@ -14,20 +14,25 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void showNotification(Context context, Intent intent) {
-        int alarmId = intent.getIntExtra("ALARM_ID", -1);
+        String alarmTime = intent.getStringExtra("ALARM_TIME");
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alarmClockChannel")
                 .setSmallIcon(R.drawable.ic_alarm)
-                .setContentTitle("Alarm Clock")
-                .setContentText("Your alarm with ID " + alarmId + " is ringing!")
+                .setContentTitle("Alarma")
+                .setContentText("Alarma programada para " + alarmTime + " está sonando!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
         Intent notificationIntent = new Intent(context, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, alarmId, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(
+                context,
+                0,
+                notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
         builder.setContentIntent(contentIntent);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(alarmId, builder.build());
+        notificationManager.notify(0, builder.build());
     }
 }

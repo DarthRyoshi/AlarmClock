@@ -1,47 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
-
-    <Button
-        android:id="@+id/topRightButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="-3dp"
-        android:layout_marginBottom="32dp"
-        android:text="Inicio Sesion" />
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topRightButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:timePickerMode="spinner"
-        android:layout_marginTop="50dp"/> <!-- Aumentar el margen superior aquí -->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/setAlarmButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Poner Alarma"
-        android:layout_below="@id/timePicker"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:text="Configurar Alarma" />
 
     <Button
         android:id="@+id/viewAlarmsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Alarmas"
-        android:layout_below="@id/setAlarmButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-</RelativeLayout>
+        android:text="Ver Alarmas" />
+
+    <Button
+        android:id="@+id/topRightButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar Sesión" />
+</LinearLayout>

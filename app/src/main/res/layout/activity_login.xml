@@ -6,39 +6,31 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre Usuario"
-        android:layout_marginBottom="16dp" />
+        android:hint="Nombre de usuario"
+        android:inputType="text"
+        android:minHeight="48dp"/>
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:layout_marginBottom="16dp" />
+        android:minHeight="48dp"/>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:text="Iniciar Sesión"
+        android:minHeight="48dp"/>
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:padding="12dp"
-            android:text="Iniciar Sesión" />
-
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="Volver" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Cuenta" />
 </LinearLayout>
